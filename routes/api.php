@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('registration', [UsereAuthController::class, 'registration'])->name('user.registration.store');
+Route::post('login', [UsereAuthController::class, 'login'])->name('user.login');
 Route::group(['middleware' => ['auth:sanctum', 'user_auth']], function () {
     Route::get('profile', [ProfileController::class, 'index']);
     Route::post('profile/update', [ProfileController::class, 'update']);

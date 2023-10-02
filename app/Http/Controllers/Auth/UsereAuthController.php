@@ -64,4 +64,46 @@ class UsereAuthController extends Controller
             'user_info' => $model,
         ], 200);
     }
+    public function login(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'phone' => 'required',
+                'password' => 'required',
+            ]
+
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 400,
+                'errors' => $validator->errors(),
+            ]);
+        }
+        //check 
+        $user = User::where('phone', $request->phone)->first();
+
+        if (!$user) {
+            return response()->json([
+                "status" => "error",
+                'message' => 'Please provide valid Phone Number...'
+            ], 401);
+        }
+        //check password
+        if (!Hash::check($request->password, $user->password)) {
+            return response([
+                "status" => "error",
+                'message' => 'Wrong Password..!'
+            ], 401);
+        }
+
+        $user_access_token = $user->createToken('club85hfgufwevcxy3523jjhvcx')->plainTextToken;
+
+        return response()->json([
+            'status' => 'ok',
+            'user_access_token' => $user_access_token,
+            'user_info' => $user,
+        ], 200);
+    }
 }

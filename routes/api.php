@@ -25,4 +25,5 @@ Route::post('login', [UsereAuthController::class, 'login'])->name('user.login');
 Route::group(['middleware' => ['auth:sanctum', 'user_auth']], function () {
     Route::get('profile', [ProfileController::class, 'index']);
     Route::post('profile/update', [ProfileController::class, 'update']);
+    Route::get('logout', [UsereAuthController::class, 'logout']);
 });

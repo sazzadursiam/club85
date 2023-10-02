@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -104,6 +105,17 @@ class UsereAuthController extends Controller
             'status' => 'ok',
             'user_access_token' => $user_access_token,
             'user_info' => $user,
+        ], 200);
+    }
+
+    public function logout()
+    {
+        $user = Auth::user();
+        $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
+
+        return response()->json([
+            "status" => "ok",
+            "message" => 'Logout Successful....!'
         ], 200);
     }
 }

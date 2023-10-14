@@ -13,46 +13,59 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->uuid('uuid');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
             $table->string('member_id')->nullable();
+            $table->string('name');
             $table->string('name_bangla')->nullable();
             $table->string('id_card_name')->nullable();
-            $table->string('nid_passport')->nullable();
+            $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();
             $table->string('secondary_phone')->nullable();
-            $table->string('emergency_contact')->nullable();
-            $table->string('photo')->nullable();
-            $table->string('blood_group')->nullable();
-            $table->date('dob')->nullable();
-
-            $table->text('school')->nullable();
-            $table->text('college')->nullable();
+            $table->string('nid_passport')->nullable();
 
             $table->text('present_address')->nullable();
-            $table->text('present_address_line_2')->nullable();
             $table->string('present_district_city')->nullable();
             $table->string('present_country')->nullable();
-            $table->string('address_area')->nullable();
+
             $table->text('parmanent_address')->nullable();
             $table->text('parmanent_district_city')->nullable();
             $table->text('parmanent_country')->nullable();
+
+            $table->date('dob')->nullable();
+            $table->string('blood_group')->nullable();
 
             $table->string('spouse_name')->nullable();
             $table->string('spouse_phone')->nullable();
             $table->string('spouse_email')->nullable();
 
+            $table->string('children_1_name')->nullable();
+            $table->string('children_2_name')->nullable();
+            $table->string('children_3_name')->nullable();
+            $table->string('children_4_name')->nullable();
+
+            $table->string('school')->nullable();
+            $table->string('school_district')->nullable();
+            $table->string('college')->nullable();
+            $table->string('college_district')->nullable();
+
             $table->string('occupation')->nullable();
             $table->text('additional_info_profession')->nullable();
+            $table->string('office_name')->nullable();
             $table->text('office_location')->nullable();
 
-            $table->tinyInteger('want_visa_prepaid_card')->default(0)->comment('0: No, 1: Yes');
             $table->string('facebook_id')->nullable();
+            $table->string('instagram_id')->nullable();
+
+            $table->string('bkash_payment_ref')->nullable();
+            $table->string('photo')->nullable();
+
+            $table->string('qr_code')->nullable();
+            $table->string('id_card_file')->nullable();
 
             $table->tinyInteger('user_type')->default(0)->comment('0: App User, 1: Admin');
+
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

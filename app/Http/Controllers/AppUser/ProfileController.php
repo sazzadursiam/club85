@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
@@ -85,12 +86,8 @@ class ProfileController extends Controller
                     'errors' => $validator->errors(),
                 ], 403);
             }
-
             if ($request->has('name')) {
                 $model->name = $request->name;
-            }
-            if ($request->has('email')) {
-                $model->email = $request->email;
             }
             if ($request->has('name_bangla')) {
                 $model->name_bangla = $request->name_bangla;
@@ -98,44 +95,27 @@ class ProfileController extends Controller
             if ($request->has('id_card_name')) {
                 $model->id_card_name = $request->id_card_name;
             }
-            if ($request->has('nid_passport')) {
-                $model->nid_passport = $request->nid_passport;
+            if ($request->has('email')) {
+                $model->email = $request->email;
             }
             if ($request->has('phone')) {
                 $model->phone = $request->phone;
+                // $model->password = Hash::make($request->phone);
             }
             if ($request->has('secondary_phone')) {
                 $model->secondary_phone = $request->secondary_phone;
             }
-            if ($request->has('emergency_contact')) {
-                $model->emergency_contact = $request->emergency_contact;
-            }
-            if ($request->has('blood_group')) {
-                $model->blood_group = $request->blood_group;
-            }
-            if ($request->has('dob')) {
-                $model->dob = Carbon::parse($request->dob)->format('Y-m-d');
-            }
-            if ($request->has('school')) {
-                $model->school = $request->school;
-            }
-            if ($request->has('college')) {
-                $model->college = $request->college;
+            if ($request->has('nid_passport')) {
+                $model->nid_passport = $request->nid_passport;
             }
             if ($request->has('present_address')) {
                 $model->present_address = $request->present_address;
-            }
-            if ($request->has('present_address_line_2')) {
-                $model->present_address_line_2 = $request->present_address_line_2;
             }
             if ($request->has('present_district_city')) {
                 $model->present_district_city = $request->present_district_city;
             }
             if ($request->has('present_country')) {
                 $model->present_country = $request->present_country;
-            }
-            if ($request->has('address_area')) {
-                $model->address_area = $request->address_area;
             }
             if ($request->has('parmanent_address')) {
                 $model->parmanent_address = $request->parmanent_address;
@@ -146,6 +126,13 @@ class ProfileController extends Controller
             if ($request->has('parmanent_country')) {
                 $model->parmanent_country = $request->parmanent_country;
             }
+            if ($request->has('dob')) {
+                $model->dob =
+                    Carbon::parse($request->dob)->format('Y-m-d');
+            }
+            if ($request->has('blood_group')) {
+                $model->blood_group = $request->blood_group;
+            }
             if ($request->has('spouse_name')) {
                 $model->spouse_name = $request->spouse_name;
             }
@@ -155,21 +142,57 @@ class ProfileController extends Controller
             if ($request->has('spouse_email')) {
                 $model->spouse_email = $request->spouse_email;
             }
+
+            if ($request->has('children_1_name')) {
+                $model->children_1_name = $request->children_1_name;
+            }
+            if ($request->has('children_2_name')) {
+                $model->children_2_name = $request->children_2_name;
+            }
+            if ($request->has('children_3_name')) {
+                $model->children_3_name = $request->children_3_name;
+            }
+            if ($request->has('children_4_name')) {
+                $model->children_4_name = $request->children_4_name;
+            }
+
+            if ($request->has('school')) {
+                $model->school = $request->school;
+            }
+            if ($request->has('school_district')) {
+                $model->school_district = $request->school_district;
+            }
+            if ($request->has('college')) {
+                $model->college = $request->college;
+            }
+            if ($request->has('college_district')) {
+                $model->college_district = $request->college_district;
+            }
+
             if ($request->has('occupation')) {
                 $model->occupation = $request->occupation;
             }
             if ($request->has('additional_info_profession')) {
                 $model->additional_info_profession = $request->additional_info_profession;
             }
+            if ($request->has('office_name')) {
+                $model->office_name = $request->office_name;
+            }
             if ($request->has('office_location')) {
                 $model->office_location = $request->office_location;
             }
-            if ($request->has('want_visa_prepaid_card')) {
-                $model->want_visa_prepaid_card = $request->want_visa_prepaid_card;
-            }
+
             if ($request->has('facebook_id')) {
                 $model->facebook_id = $request->facebook_id;
             }
+            if ($request->has('instagram_id')) {
+                $model->instagram_id = $request->instagram_id;
+            }
+
+            // if ($request->has('bkash_payment_ref')) {
+            //     $model->bkash_payment_ref = $request->bkash_payment_ref;
+            // }
+
             if ($request->hasFile('photo')) {
                 //remove old image form folder if new image comes
                 if (
@@ -184,7 +207,7 @@ class ProfileController extends Controller
                 $new_name = time() . '.' . $request->photo->getClientOriginalExtension();
                 $path = '/images/profile/';
                 $photo->move(public_path($path), $new_name);
-                $model->photo = $path . $new_name;
+                $model->photo = url('/') . $path . $new_name;
             }
             $model->save();
 

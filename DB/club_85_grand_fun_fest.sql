@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2023 at 10:19 AM
+-- Generation Time: Oct 14, 2023 at 06:07 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -20,20 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `club_85_grand_fun_fest`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `child_infos`
---
-
-CREATE TABLE `child_infos` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `child_mame` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -71,8 +57,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(5, '2023_09_24_103137_create_child_infos_table', 1);
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
 
 -- --------------------------------------------------------
 
@@ -105,6 +90,13 @@ CREATE TABLE `personal_access_tokens` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
+(1, 'App\\Models\\User', 1, 'club85hfgufwevcxy3523jjhvcx', '1840ce888413278676b88cc684f5de901f353631fb460379f86364fbe025179f', '[\"*\"]', '2023-10-14 09:08:06', NULL, '2023-10-14 08:47:19', '2023-10-14 09:08:06');
+
 -- --------------------------------------------------------
 
 --
@@ -113,40 +105,47 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
   `uuid` char(36) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
   `member_id` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
   `name_bangla` varchar(255) DEFAULT NULL,
   `id_card_name` varchar(255) DEFAULT NULL,
-  `nid_passport` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
   `secondary_phone` varchar(255) DEFAULT NULL,
-  `emergency_contact` varchar(255) DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `blood_group` varchar(255) DEFAULT NULL,
-  `dob` date DEFAULT NULL,
-  `school` text DEFAULT NULL,
-  `college` text DEFAULT NULL,
+  `nid_passport` varchar(255) DEFAULT NULL,
   `present_address` text DEFAULT NULL,
-  `present_address_line_2` text DEFAULT NULL,
   `present_district_city` varchar(255) DEFAULT NULL,
   `present_country` varchar(255) DEFAULT NULL,
-  `address_area` varchar(255) DEFAULT NULL,
   `parmanent_address` text DEFAULT NULL,
   `parmanent_district_city` text DEFAULT NULL,
   `parmanent_country` text DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `blood_group` varchar(255) DEFAULT NULL,
   `spouse_name` varchar(255) DEFAULT NULL,
   `spouse_phone` varchar(255) DEFAULT NULL,
   `spouse_email` varchar(255) DEFAULT NULL,
+  `children_1_name` varchar(255) DEFAULT NULL,
+  `children_2_name` varchar(255) DEFAULT NULL,
+  `children_3_name` varchar(255) DEFAULT NULL,
+  `children_4_name` varchar(255) DEFAULT NULL,
+  `school` varchar(255) DEFAULT NULL,
+  `school_district` varchar(255) DEFAULT NULL,
+  `college` varchar(255) DEFAULT NULL,
+  `college_district` varchar(255) DEFAULT NULL,
   `occupation` varchar(255) DEFAULT NULL,
   `additional_info_profession` text DEFAULT NULL,
+  `office_name` varchar(255) DEFAULT NULL,
   `office_location` text DEFAULT NULL,
-  `want_visa_prepaid_card` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0: No, 1: Yes',
   `facebook_id` varchar(255) DEFAULT NULL,
+  `instagram_id` varchar(255) DEFAULT NULL,
+  `bkash_payment_ref` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `qr_code` varchar(255) DEFAULT NULL,
+  `id_card_file` varchar(255) DEFAULT NULL,
   `user_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0: App User, 1: Admin',
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -155,13 +154,6 @@ CREATE TABLE `users` (
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `child_infos`
---
-ALTER TABLE `child_infos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `child_infos_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -202,12 +194,6 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `child_infos`
---
-ALTER TABLE `child_infos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -217,29 +203,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `child_infos`
---
-ALTER TABLE `child_infos`
-  ADD CONSTRAINT `child_infos_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AppUser\MasterController;
+use App\Http\Controllers\AppUser\PaymentController;
 use App\Http\Controllers\AppUser\ProfileController;
 use App\Http\Controllers\Auth\UsereAuthController;
 use Illuminate\Http\Request;
@@ -25,5 +27,7 @@ Route::post('login', [UsereAuthController::class, 'login'])->name('user.login');
 Route::group(['middleware' => ['auth:sanctum', 'user_auth']], function () {
     Route::get('profile', [ProfileController::class, 'index']);
     Route::post('profile/update', [ProfileController::class, 'update']);
+    Route::post('payment-ref', [PaymentController::class, 'store']);
+    Route::get('get-my-id', [MasterController::class, 'index']);
     Route::get('logout', [UsereAuthController::class, 'logout']);
 });

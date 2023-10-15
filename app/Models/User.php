@@ -56,4 +56,9 @@ class User extends Authenticatable
             $model->save();
         });
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'user_id');
+    }
 }

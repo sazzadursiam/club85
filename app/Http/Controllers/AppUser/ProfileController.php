@@ -17,7 +17,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profile_info = User::find(Auth::user()->id);
+        $profile_info = User::with(['payments'])->find(Auth::user()->id);
         if ($profile_info) {
             return response()->json([
                 'status' => 'ok',

@@ -105,8 +105,11 @@ class ProfileController extends Controller
             if ($request->has('secondary_phone')) {
                 $model->secondary_phone = $request->secondary_phone;
             }
-            if ($request->has('nid_passport')) {
-                $model->nid_passport = $request->nid_passport;
+            if ($request->has('nid')) {
+                $model->nid = $request->nid;
+            }
+            if ($request->has('passport')) {
+                $model->passport = $request->passport;
             }
             if ($request->has('present_address')) {
                 $model->present_address = $request->present_address;

@@ -54,8 +54,11 @@ class UsereAuthController extends Controller
         if ($request->has('secondary_phone')) {
             $model->secondary_phone = $request->secondary_phone;
         }
-        if ($request->has('nid_passport')) {
-            $model->nid_passport = $request->nid_passport;
+        if ($request->has('nid')) {
+            $model->nid = $request->nid;
+        }
+        if ($request->has('passport')) {
+            $model->passport = $request->passport;
         }
         if ($request->has('present_address')) {
             $model->present_address = $request->present_address;
@@ -159,6 +162,7 @@ class UsereAuthController extends Controller
 
             User::where('id', $model->id)->update([
                 'qr_code' => url('/') . $qr_name,
+                'qr_text' => $qr_text,
             ]);
 
             $user_access_token = $model->createToken('club85hfgufwevcxy3523jjhvcx')->plainTextToken;
@@ -166,8 +170,7 @@ class UsereAuthController extends Controller
         return response()->json([
             'status' => 'ok',
             'token' => $user_access_token,
-            'user_info' => $model,
-            'qr_text' => $qr_text,
+            'user_info' => User::find(Auth::user()->id),
         ], 200);
     }
     public function login(Request $request)

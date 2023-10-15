@@ -20,6 +20,8 @@ class MasterController extends Controller
         $member_id = $info->member_id;
         $pphoto = $info->photo;
 
+        // return $pphoto;
+
         $html = <<<HTML
                     <!DOCTYPE html>
                         <html lang="en">
@@ -68,7 +70,6 @@ class MasterController extends Controller
                                     border: 1px solid gray;
                                     margin: 0 auto;
                                     overflow: hidden;
-                                    /* margin-bottom: 10px; */
                                 }
 
                                 .img-wrapper img {
@@ -98,7 +99,7 @@ class MasterController extends Controller
                             <page>
                                 <div id="id_card">
                                     <div class="img-wrapper">
-                                        <img src="{$pphoto}" alt="" height="80px" width="80px">
+                                        <img src="{$pphoto}" alt="" height="70px" width="70px">
                                     </div>
                                     <h2 class="name" style="font-size:16px;margin-top:5px;">{$card_name}</h2>
                                     <h3 class="id-no" style="font-size:14px">{$member_id}</h3>
@@ -114,7 +115,7 @@ class MasterController extends Controller
                     </html>
                 HTML;
 
-        $filename = $info->member_id . ".pdf";
+        $filename = $info->member_id . "-" . time() . ".pdf";
         $path = "pdf/" . $filename;
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($html)->save($path);

@@ -79,8 +79,8 @@ class UsereAuthController extends Controller
             $model->parmanent_country = $request->parmanent_country;
         }
         if ($request->has('dob')) {
-            $model->dob =
-                Carbon::parse($request->dob)->format('Y-m-d');
+            // $model->dob = Carbon::parse($request->dob)->format('Y-m-d');
+            $model->dob = $request->dob;
         }
         if ($request->has('blood_group')) {
             $model->blood_group = $request->blood_group;
@@ -141,7 +141,7 @@ class UsereAuthController extends Controller
             $model->instagram_id = $request->instagram_id;
         }
 
-        if($request->has('bkash_number')){
+        if ($request->has('bkash_number')) {
             $model->bkash_number = $request->bkash_number;
         }
 
@@ -170,7 +170,7 @@ class UsereAuthController extends Controller
         return response()->json([
             'status' => 'ok',
             'token' => $user_access_token,
-            'user_info' => User::find(Auth::user()->id),
+            'user_info' => $model,
         ], 200);
     }
     public function login(Request $request)

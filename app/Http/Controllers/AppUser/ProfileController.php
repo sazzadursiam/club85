@@ -130,8 +130,8 @@ class ProfileController extends Controller
                 $model->parmanent_country = $request->parmanent_country;
             }
             if ($request->has('dob')) {
-                $model->dob =
-                    Carbon::parse($request->dob)->format('Y-m-d');
+                // $model->dob = Carbon::parse($request->dob)->format('Y-m-d');
+                $model->dob = $request->dob;
             }
             if ($request->has('blood_group')) {
                 $model->blood_group = $request->blood_group;

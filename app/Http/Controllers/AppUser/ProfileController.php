@@ -192,9 +192,9 @@ class ProfileController extends Controller
                 $model->instagram_id = $request->instagram_id;
             }
 
-            // if ($request->has('bkash_payment_ref')) {
-            //     $model->bkash_payment_ref = $request->bkash_payment_ref;
-            // }
+            if ($request->has('bkash_number')) {
+                $model->bkash_number = $request->bkash_number;
+            }
 
             if ($request->hasFile('photo')) {
                 //remove old image form folder if new image comes

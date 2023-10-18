@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('temp_users', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
-            $table->string('member_id')->nullable();
             $table->string('name');
             $table->string('name_bangla')->nullable();
             $table->string('id_card_name')->nullable();
@@ -60,18 +58,9 @@ return new class extends Migration
             $table->string('bkash_number')->nullable();
             $table->string('photo')->nullable();
 
-            $table->string('qr_code')->nullable();
-            $table->string('qr_text')->nullable();
-            $table->string('id_card_file')->nullable();
 
-            $table->string('is_verified')->nullable();
+            $table->string('otp')->nullable();
 
-            $table->tinyInteger('user_type')->default(0)->comment('0: App User, 1: Admin');
-
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
-
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -81,6 +70,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('temp_users');
     }
 };

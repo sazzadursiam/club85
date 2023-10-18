@@ -73,6 +73,11 @@ class MasterController extends Controller
                                 }
 
                                 .img-wrapper img {
+                                    -webkit-transform: rotate(180deg);     /* Chrome and other webkit browsers */
+                                    -moz-transform: rotate(180deg);        /* FF */
+                                    -o-transform: rotate(180deg);          /* Opera */
+                                    -ms-transform: rotate(180deg);         /* IE9 */
+                                    transform: rotate(180deg);
                                     height: 100%;
                                     width: 100%;
                                     object-fit: cover;
@@ -83,7 +88,7 @@ class MasterController extends Controller
                                 .id-no {
                                     text-align: center;
                                     margin-top: 0;
-                                    margin-bottom: 0;
+                                    margin-bottom: 3px;
                                 }
 
                                 .qr-warpper {
@@ -98,13 +103,14 @@ class MasterController extends Controller
                         <body id="main_body">
                             <page>
                                 <div id="id_card">
+                                    <h3 class="id-no" style="font-size:14px">CLUB85</h3>
                                     <div class="img-wrapper">
                                         <img src="{$pphoto}" alt="" height="70px" width="70px">
                                     </div>
                                     <h2 class="name" style="font-size:16px;margin-top:5px;">{$card_name}</h2>
-                                    <h3 class="id-no" style="font-size:14px">{$member_id}</h3>
+                                    <!-- <h3 class="id-no" style="font-size:14px">{$member_id}</h3> -->
                                     <p class="school" style="font-size:11px">{$school}</p>
-                                    <div class="qr-warpper" style="margin-top:30px">
+                                    <div class="qr-warpper" style="margin-top:20px">
                                         <img src="{$qr_code}" alt="" height="70px" width="70px">
                                     </div>
                                 </div>
@@ -127,5 +133,14 @@ class MasterController extends Controller
             'status' => 'ok',
             'info' =>  User::where('id', Auth::user()->id)->first(),
         ], 200);
+    }
+
+    public function showInfo($uuid)
+    {
+        $user = User::where('uuid', $uuid)->first();
+        if ($user) {
+            return view('id-card', compact('user'));
+        }
+        abort(404);
     }
 }

@@ -1,96 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Member Info of {{$user->name}}</title>
     <style>
-        body {
-            width: 100%;
-            margin: 0 auto;
-        }
 
-        page {
-            background: white;
-            display: block;
-            margin: 0 auto;
-            margin-bottom: 0.5cm;
-            height: 3.88in;
-            width: 2.63in;
-        }
-
-        @page {
-            size: 2.63in 3.88in;
-        }
-
-        @media print {
-
-            body,
-            page {
-                margin: 0;
-                box-shadow: 0;
-                -webkit-print-color-adjust: exact;
-
-            }
-        }
-
-        #id_card {
-            height: 3.88in;
-            width: 2.63in;
-            padding: 10px;
-            margin: 0 auto;
-        }
-
-        .img-wrapper {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 1px solid gray;
-            margin: 0 auto;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
-
-        .img-wrapper img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
-
-        .name,
-        .school,
-        .id-no {
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 5px;
-        }
-
-        .qr-warpper {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto;
-            margin-top: 80px;
-        }
     </style>
 </head>
 
-<body id="main_body">
-    <page>
-        <div id="id_card">
-            <div class="img-wrapper">
-                <img src="{{asset('images/profile/1697283509.png')}}" alt="">
-            </div>
-            <h2 class="name">AleX SaM</h2>
-            <h3 class="id-no">G85-0001</h3>
-            <p class="school">Gabtali Pilot High School</p>
-            <div class="qr-warpper">
-                <img src="{{asset('images/qr.png')}}" alt="" height="100px" width="100px">
+<body>
+    <div class="container py-2 py-lg-5">
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mx-auto">
+                <div style="background:#eaeaea;min-height: 60px;display: flex;align-items: center;justify-content: center;box-shadow: -2px 0px 8px -5px rgba(0,0,0,0.69);
+-webkit-box-shadow: -2px 0px 8px -5px rgba(0,0,0,0.69);
+-moz-box-shadow: -2px 0px 8px -5px rgba(0,0,0,0.69);">
+                    <h1>{{$user->name}}</h1>
+                </div>
+                <div class="row py-3">
+                    <div class="col-6">
+                        <img src="{{ $user->photo }}" alt="" class="img-fluid">
+                    </div>
+                    <div class="col-6">
+                        <h3>CLUB85</h3>
+                        <h5>{{$user->occupation}}</h5>
+                        <p>
+                        <address style="font-size:13px">
+                            {{$user->present_address}}
+                        </address>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div style="background:#eaeaea;min-height: 40px;display: flex;align-items: center;padding: 0 20px;box-shadow: -5px 2px 8px -2px rgba(0,0,0,0.7);
+-webkit-box-shadow: -5px 2px 8px -2px rgba(0,0,0,0.7);
+-moz-box-shadow: -5px 2px 8px -2px rgba(0,0,0,0.7);">
+                            <p class="mb-0">
+                                <i class="fa-solid fa-phone me-2"></i>{{$user->phone}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div style="background:#eaeaea;min-height: 40px;display: flex;align-items: center;padding: 0 20px;box-shadow: -5px 2px 8px -2px rgba(0,0,0,0.7);
+-webkit-box-shadow: -5px 2px 8px -2px rgba(0,0,0,0.7);
+-moz-box-shadow: -5px 2px 8px -2px rgba(0,0,0,0.7);">
+                            <p class="mb-0">
+                                <i class="fa-solid fa-mobile-retro me-2"></i>{{$user->secondary_phone}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <div style="background:#eaeaea;min-height: 40px;display: flex;align-items: center;padding: 0 20px;box-shadow: -5px 2px 8px -2px rgba(0,0,0,0.7);
+-webkit-box-shadow: -5px 2px 8px -2px rgba(0,0,0,0.7);
+-moz-box-shadow: -5px 2px 8px -2px rgba(0,0,0,0.7);">
+                            <p class="mb-0">
+                                <i class="fa-solid fa-envelope me-2"></i>{{$user->email}}
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </page>
-<img src="{{ asset('/images/qrcode.svg') }}" alt="" title="" />
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

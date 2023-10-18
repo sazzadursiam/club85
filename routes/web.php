@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'id-card');
-Route::get('get-my-id', [MasterController::class, 'index']);
+Route::get('club-members/{uuid}', [MasterController::class, 'showInfo']);
+// Route::get('get-my-id', [MasterController::class, 'index']);

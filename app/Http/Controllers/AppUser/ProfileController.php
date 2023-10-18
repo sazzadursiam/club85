@@ -73,7 +73,7 @@ class ProfileController extends Controller
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'email' => 'nullable|email|unique:users,id,' . Auth::user()->id,
+                    'email' => 'nullable|email',
                     'phone' => 'nullable|unique:users,id,' . Auth::user()->id,
                     'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]
@@ -128,6 +128,12 @@ class ProfileController extends Controller
             }
             if ($request->has('parmanent_country')) {
                 $model->parmanent_country = $request->parmanent_country;
+            }
+            if ($request->has('province_permanent_address')) {
+                $model->province_permanent_address = $request->province_permanent_address;
+            }
+            if ($request->has('province_present_address')) {
+                $model->province_present_address = $request->province_present_address;
             }
             if ($request->has('dob')) {
                 // $model->dob = Carbon::parse($request->dob)->format('Y-m-d');
@@ -201,7 +207,7 @@ class ProfileController extends Controller
                 if (
                     $model->photo != null || $model->photo != ""
                 ) {
-                    $image_file = public_path($model->photo);
+                    $image_file = $model->photo;
                     if (file_exists($image_file)) {
                         unlink($image_file);
                     }

@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 18, 2023 at 08:53 AM
--- Server version: 10.2.44-MariaDB
+-- Generation Time: Oct 28, 2023 at 11:34 AM
+-- Server version: 10.6.15-MariaDB
 -- PHP Version: 8.1.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `club85sarfaa_db`
+-- Database: `club85_db`
 --
 
 -- --------------------------------------------------------
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -45,7 +45,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -66,8 +66,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -80,8 +80,8 @@ CREATE TABLE `password_reset_tokens` (
 CREATE TABLE `payments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `bkash_payment_ref` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payment_amount` double NOT NULL,
+  `bkash_payment_ref` varchar(255) NOT NULL,
+  `payment_amount` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -91,8 +91,9 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`id`, `user_id`, `bkash_payment_ref`, `payment_amount`, `created_at`, `updated_at`) VALUES
-(1, 27, '1990', 1990, '2023-10-18 00:17:13', '2023-10-18 00:17:13'),
-(2, 27, 'abcd1234', 1990, '2023-10-18 00:19:09', '2023-10-18 00:19:09');
+(1, 6, '1', '1990', '2023-10-19 13:53:41', '2023-10-19 13:53:41'),
+(2, 7, 'abcd', '1990', '2023-10-19 15:39:13', '2023-10-19 15:39:13'),
+(3, 7, 'abcd', '1990', '2023-10-19 15:39:23', '2023-10-19 15:39:23');
 
 -- --------------------------------------------------------
 
@@ -102,11 +103,11 @@ INSERT INTO `payments` (`id`, `user_id`, `bkash_payment_ref`, `payment_amount`, 
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -225,7 +226,34 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (113, 'App\\Models\\User', 27, 'club85hfgufwevcxy3523jjhvcx', 'ad910745746d4be38c6f33d84fac15df8a0f02c0c04141558fa3b7a603a25f13', '[\"*\"]', NULL, NULL, '2023-10-18 15:42:31', '2023-10-18 15:42:31'),
 (114, 'App\\Models\\User', 27, 'club85hfgufwevcxy3523jjhvcx', 'bf2094c435f6595974912277e140b85fcd01718380b8b376f54c2d95d77662bc', '[\"*\"]', '2023-10-18 15:46:36', NULL, '2023-10-18 15:46:21', '2023-10-18 15:46:36'),
 (115, 'App\\Models\\User', 27, 'club85hfgufwevcxy3523jjhvcx', '5e8d68125c6bb5ebd93f83f5c60219047ea20bcd7521cd477f3457f3f30ecb7d', '[\"*\"]', '2023-10-18 15:50:04', NULL, '2023-10-18 15:49:30', '2023-10-18 15:50:04'),
-(116, 'App\\Models\\User', 28, 'club85hfgufwevcxy3523jjhvcx', '9fb96a76e206377c20fd3ac9beeb17dd1a3f0dc51c126d65d08641552625cf13', '[\"*\"]', NULL, NULL, '2023-10-18 16:52:33', '2023-10-18 16:52:33');
+(116, 'App\\Models\\User', 28, 'club85hfgufwevcxy3523jjhvcx', '9fb96a76e206377c20fd3ac9beeb17dd1a3f0dc51c126d65d08641552625cf13', '[\"*\"]', NULL, NULL, '2023-10-18 16:52:33', '2023-10-18 16:52:33'),
+(117, 'App\\Models\\User', 29, 'club85hfgufwevcxy3523jjhvcx', '29d1aaa7362c9434327543c1831f5bbb51f50309967fd1aceea985a04b65eb08', '[\"*\"]', '2023-10-18 16:59:57', NULL, '2023-10-18 16:59:06', '2023-10-18 16:59:57'),
+(118, 'App\\Models\\User', 30, 'club85hfgufwevcxy3523jjhvcx', '38092c49c533c7159f8de083b5ac01113316a5020ee70ae2bd9a09f4bfd29753', '[\"*\"]', NULL, NULL, '2023-10-18 19:14:31', '2023-10-18 19:14:31'),
+(119, 'App\\Models\\User', 31, 'club85hfgufwevcxy3523jjhvcx', '7ded3d29be43270aab54ecfff9196ab358d2e9890448f02a65550456add04307', '[\"*\"]', NULL, NULL, '2023-10-18 19:25:13', '2023-10-18 19:25:13'),
+(120, 'App\\Models\\User', 32, 'club85hfgufwevcxy3523jjhvcx', '58c3efded8e3229f27e1e257a0009c6f79dba403a6e6afebe506c5cc29bdf5dc', '[\"*\"]', '2023-10-18 19:40:06', NULL, '2023-10-18 19:35:31', '2023-10-18 19:40:06'),
+(121, 'App\\Models\\User', 32, 'club85hfgufwevcxy3523jjhvcx', 'd880f9a8b4a24fafe25f3a7bc3f7acab3ba7fa7751d824f3ce96d5f9f0a47a94', '[\"*\"]', '2023-10-18 19:44:45', NULL, '2023-10-18 19:44:16', '2023-10-18 19:44:45'),
+(122, 'App\\Models\\User', 32, 'club85hfgufwevcxy3523jjhvcx', '14ad6707beabec535523bdbbdc68290f2bb418b3da03b2b9122b4d2f45d65610', '[\"*\"]', NULL, NULL, '2023-10-18 20:59:32', '2023-10-18 20:59:32'),
+(123, 'App\\Models\\User', 33, 'club85hfgufwevcxy3523jjhvcx', '4ed5bc62a6a452472d6f59fc57d64ece06cf92f19365d2410362bb84c2427647', '[\"*\"]', NULL, NULL, '2023-10-18 21:14:09', '2023-10-18 21:14:09'),
+(124, 'App\\Models\\User', 34, 'club85hfgufwevcxy3523jjhvcx', '78c34cb4a0bb9e9b4be1404ae1ca2ac7aecda725311d816930c854894dcf5551', '[\"*\"]', NULL, NULL, '2023-10-18 21:17:11', '2023-10-18 21:17:11'),
+(125, 'App\\Models\\User', 34, 'club85hfgufwevcxy3523jjhvcx', '47b6872dd661997b89353b80765416f871ac29fb0e78389de5d9e5a521a337c8', '[\"*\"]', '2023-10-18 21:25:09', NULL, '2023-10-18 21:24:44', '2023-10-18 21:25:09'),
+(126, 'App\\Models\\User', 34, 'club85hfgufwevcxy3523jjhvcx', '1d105805436119b29eabeb2d742fe047c73947a927121ed7387f89b10342d848', '[\"*\"]', '2023-10-18 22:00:26', NULL, '2023-10-18 21:53:05', '2023-10-18 22:00:26'),
+(127, 'App\\Models\\User', 35, 'club85hfgufwevcxy3523jjhvcx', '39bf47f257fce791a78270ad608cc142e3833c98521671e1ac8dffd2353b8ffa', '[\"*\"]', '2023-10-18 22:47:13', NULL, '2023-10-18 22:43:03', '2023-10-18 22:47:13'),
+(128, 'App\\Models\\User', 35, 'club85hfgufwevcxy3523jjhvcx', '63686fbc535e3cf6b7310da3c0a284441bf33cf0ede0c8ddda411f7cda77d0a5', '[\"*\"]', NULL, NULL, '2023-10-18 22:59:55', '2023-10-18 22:59:55'),
+(129, 'App\\Models\\User', 35, 'club85hfgufwevcxy3523jjhvcx', '648e657b86538710e27ea6f06ca9847cddd8a653e1e104d9ce7229aa59c4f31f', '[\"*\"]', '2023-10-19 00:39:55', NULL, '2023-10-19 00:18:49', '2023-10-19 00:39:55'),
+(130, 'App\\Models\\User', 1, 'club85hfgufwevcxy3523jjhvcx', '4a47c431afe60de42dfdf73ae3fd56c25d322a93a25cc070c7d546f2bde57077', '[\"*\"]', NULL, NULL, '2023-10-19 11:19:27', '2023-10-19 11:19:27'),
+(132, 'App\\Models\\User', 2, 'club85hfgufwevcxy3523jjhvcx', '86fef7ae75c7d29723fcad0a4faadd2d79dcf90952e997c3d79fbaa46d6957ea', '[\"*\"]', '2023-10-19 12:28:22', NULL, '2023-10-19 11:45:11', '2023-10-19 12:28:22'),
+(133, 'App\\Models\\User', 1, 'club85hfgufwevcxy3523jjhvcx', '4ee8fa33d7c776f632a6673f391376e2cac8eb0db8b6ce991e00f3f40b13b824', '[\"*\"]', NULL, NULL, '2023-10-19 11:53:39', '2023-10-19 11:53:39'),
+(134, 'App\\Models\\User', 1, 'club85hfgufwevcxy3523jjhvcx', 'c5afc240d8dd5671c165567a2c67e8cb201bb3caef3dca74db60d37f6039d59d', '[\"*\"]', NULL, NULL, '2023-10-19 11:54:54', '2023-10-19 11:54:54'),
+(135, 'App\\Models\\User', 1, 'club85hfgufwevcxy3523jjhvcx', '09e609843033dd8b8785c62bceb83b3193d28af5be227ab0143ad6b540113c82', '[\"*\"]', NULL, NULL, '2023-10-19 11:56:01', '2023-10-19 11:56:01'),
+(136, 'App\\Models\\User', 1, 'club85hfgufwevcxy3523jjhvcx', '7c16c21efcb8685d42d498e6f9ee581269b4f43324b00e05562284810000c94f', '[\"*\"]', NULL, NULL, '2023-10-19 12:01:22', '2023-10-19 12:01:22'),
+(137, 'App\\Models\\User', 1, 'club85hfgufwevcxy3523jjhvcx', 'b3ba246aeed818a5134e1bbf234268416b6437ba01a51c7e39f694bf5f8f381c', '[\"*\"]', NULL, NULL, '2023-10-19 12:29:58', '2023-10-19 12:29:58'),
+(138, 'App\\Models\\User', 3, 'club85hfgufwevcxy3523jjhvcx', '9a9f6f5f29a21edb01dac3df33099bca1fa6e351e40db9321d2d677ddbae6d97', '[\"*\"]', '2023-10-19 12:34:07', NULL, '2023-10-19 12:33:27', '2023-10-19 12:34:07'),
+(139, 'App\\Models\\User', 4, 'club85hfgufwevcxy3523jjhvcx', '8532cd8b55fed3271030d053efc3d873bb951d9940b9d62a750efd34b0429efe', '[\"*\"]', '2023-10-19 13:09:42', NULL, '2023-10-19 12:56:21', '2023-10-19 13:09:42'),
+(140, 'App\\Models\\User', 1, 'club85hfgufwevcxy3523jjhvcx', '184367e31379894441f0dcfc1049017d5288ade1265b679f0e425810fffa4127', '[\"*\"]', NULL, NULL, '2023-10-19 13:27:18', '2023-10-19 13:27:18'),
+(141, 'App\\Models\\User', 3, 'club85hfgufwevcxy3523jjhvcx', '459d6023d118de899d6d9189271c49639f15838b4c7040f4d4132947685f3970', '[\"*\"]', '2023-10-19 13:30:27', NULL, '2023-10-19 13:30:03', '2023-10-19 13:30:27'),
+(142, 'App\\Models\\User', 5, 'club85hfgufwevcxy3523jjhvcx', '018f63e64b326a52325c2ceb996c0b518df9f9f6cd3287348fcd2486cb2f0700', '[\"*\"]', '2023-10-19 13:46:55', NULL, '2023-10-19 13:46:23', '2023-10-19 13:46:55'),
+(145, 'App\\Models\\User', 6, 'club85hfgufwevcxy3523jjhvcx', '7a164a18413ffb8ba04cc85a393b11ca27567ead1d15a5bee79f92177260c17b', '[\"*\"]', '2023-10-19 13:53:41', NULL, '2023-10-19 13:53:06', '2023-10-19 13:53:41'),
+(146, 'App\\Models\\User', 7, 'club85hfgufwevcxy3523jjhvcx', 'fe21722e5911c3e9ce83460b9c1bc65296d0784b8d381c738ca75f2329616bfb', '[\"*\"]', '2023-10-19 15:39:52', NULL, '2023-10-19 15:36:20', '2023-10-19 15:39:52');
 
 -- --------------------------------------------------------
 
@@ -235,53 +263,53 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `member_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name_bangla` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `id_card_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `secondary_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `passport` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `present_address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `present_district_city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `present_country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parmanent_address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parmanent_district_city` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parmanent_country` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `province_present_address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `province_permanent_address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dob` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `blood_group` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `spouse_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `spouse_phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `spouse_email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `children_1_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `children_2_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `children_3_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `children_4_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `school` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `school_district` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `college` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `college_district` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `occupation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `additional_info_profession` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `office_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `office_location` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `facebook_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `instagram_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bkash_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `qr_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `qr_text` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `id_card_file` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uuid` char(36) NOT NULL,
+  `member_id` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `name_bangla` varchar(255) DEFAULT NULL,
+  `id_card_name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `secondary_phone` varchar(255) DEFAULT NULL,
+  `nid` varchar(255) DEFAULT NULL,
+  `passport` varchar(255) DEFAULT NULL,
+  `present_address` text DEFAULT NULL,
+  `present_district_city` varchar(255) DEFAULT NULL,
+  `present_country` varchar(255) DEFAULT NULL,
+  `parmanent_address` text DEFAULT NULL,
+  `parmanent_district_city` text DEFAULT NULL,
+  `parmanent_country` text DEFAULT NULL,
+  `province_present_address` text DEFAULT NULL,
+  `province_permanent_address` text DEFAULT NULL,
+  `dob` varchar(255) DEFAULT NULL,
+  `blood_group` varchar(255) DEFAULT NULL,
+  `spouse_name` varchar(255) DEFAULT NULL,
+  `spouse_phone` varchar(255) DEFAULT NULL,
+  `spouse_email` varchar(255) DEFAULT NULL,
+  `children_1_name` varchar(255) DEFAULT NULL,
+  `children_2_name` varchar(255) DEFAULT NULL,
+  `children_3_name` varchar(255) DEFAULT NULL,
+  `children_4_name` varchar(255) DEFAULT NULL,
+  `school` varchar(255) DEFAULT NULL,
+  `school_district` varchar(255) DEFAULT NULL,
+  `college` varchar(255) DEFAULT NULL,
+  `college_district` varchar(255) DEFAULT NULL,
+  `occupation` varchar(255) DEFAULT NULL,
+  `additional_info_profession` text DEFAULT NULL,
+  `office_name` varchar(255) DEFAULT NULL,
+  `office_location` text DEFAULT NULL,
+  `facebook_id` varchar(255) DEFAULT NULL,
+  `instagram_id` varchar(255) DEFAULT NULL,
+  `bkash_number` varchar(255) DEFAULT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `qr_code` varchar(255) DEFAULT NULL,
+  `qr_text` varchar(255) DEFAULT NULL,
+  `id_card_file` varchar(255) DEFAULT NULL,
   `user_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0: App User, 1: Admin',
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `otp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `otp` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -291,10 +319,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `uuid`, `member_id`, `name`, `name_bangla`, `id_card_name`, `email`, `phone`, `secondary_phone`, `nid`, `passport`, `present_address`, `present_district_city`, `present_country`, `parmanent_address`, `parmanent_district_city`, `parmanent_country`, `province_present_address`, `province_permanent_address`, `dob`, `blood_group`, `spouse_name`, `spouse_phone`, `spouse_email`, `children_1_name`, `children_2_name`, `children_3_name`, `children_4_name`, `school`, `school_district`, `college`, `college_district`, `occupation`, `additional_info_profession`, `office_name`, `office_location`, `facebook_id`, `instagram_id`, `bkash_number`, `photo`, `qr_code`, `qr_text`, `id_card_file`, `user_type`, `email_verified_at`, `otp`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(20, 'a56bcf38-2521-48e4-aa1e-4e1bfc31c1e4', '85-00020', 'MD TANVEER RAHMAN', NULL, 'MD TANVEER RAHMAN', 'himel602@gmail.com', '+8801713001644', NULL, NULL, NULL, 'HOUSE # 8A , ROAD 4 , GULSHAN', 'DHAKA', 'BANGLADESH', NULL, NULL, NULL, NULL, '0', '3/12/1969', 'A+', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'DHANMONDI GOVT BOYS HIGH SCHOOL', 'DHAKA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://club85.sarfaa.com/images/qr/85-00020.svg', 'https://club85.sarfaa.com/club-members/a56bcf38-2521-48e4-aa1e-4e1bfc31c1e4', NULL, 0, NULL, NULL, '$2y$10$WgHvT7b7xXbTRhQVITeMPOYrEZUugL6TNmqxkpG06C/TkPtsUUmKO', NULL, '2023-10-16 05:57:06', '2023-10-16 05:57:06'),
-(21, '18cf4653-51e0-4da1-b274-47a3fa60acbe', '85-00021', 'Sazzadur Rahman', NULL, 'Alex SaM', 'sazzadur@gmail.com', '01609115611', '01747083028', '1234567890', NULL, 'present_address', 'present_district_city', 'present_country', 'parmanent_address', 'parmanent_district_city', 'parmanent_country', NULL, '0', '18/11/1995', 'B+', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Gabtali Pilot High School, Gabtali, Bogura', 'Bogura', 'Govt. Azizul Haque College, Bogura', 'Bogura', 'occupation', 'additional_info_profession', 'office_name', 'office_location', 'facebook_id', 'instagram_id', NULL, NULL, 'https://club85.sarfaa.com/images/qr/85-00021.svg', 'https://club85.sarfaa.com/club-members/18cf4653-51e0-4da1-b274-47a3fa60acbe', NULL, 0, NULL, NULL, '$2y$10$CcFdImI72T3v71znZci71OlRzeji3oktyV9Nw4yT7DZTi3SGJ5pNO', NULL, '2023-10-16 11:05:21', '2023-10-16 11:05:21'),
-(27, 'a8018ce4-1b80-4a64-a081-ae9897fcdd6b', '85-00027', 'tanver mehede', 'tanver mehede', 'jibon', 'tanvermehede51@gmail.comu', '01756531188', '01650156355', '123456789', '987654321', 'mohakhali', 'dhaka', 'bangladesh', 'mohadebpur', 'dhaka', 'bangladesh', NULL, '0', NULL, 'b+', 'mks talal', '01756530000', 'mkstalal@gmail.com', 'c1', 'c2', 'c3', 'c4', 'r.s.k', 'rajbari', 'govt', 'rajbari', 'business', 'it services', 'trodad', 'mohakhali', 'facebook.com', 'instagram.com', NULL, 'https://club85.sarfaa.com/images/profile/1697580344.jpg', 'https://club85.sarfaa.com/images/qr/85-00027.svg', 'https://club85.sarfaa.com/club-members/a8018ce4-1b80-4a64-a081-ae9897fcdd6b', 'https://club85.sarfaa.com/pdf/85-00027-1697628854.pdf', 0, NULL, '844604', '$2y$10$A6XhYUmXFxQqenpNvHBjb.TPKYPOiK804BrFDqLgRYHjYHHOEOhRa', NULL, '2023-10-17 18:37:11', '2023-10-18 15:49:30'),
-(28, 'fa004e44-21f1-4c11-aeca-5d60bb80050e', '85-00028', 'Tanver', NULL, 'Jibon', 'tanver@gmail.com', '01617335510', NULL, NULL, NULL, 'mohakhali', 'rajbari', 'dhaka', NULL, NULL, NULL, NULL, NULL, '1/10/2023', 'B+', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'RSK', 'Dhaka', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://club85.sarfaa.com/images/profile/1697633552.png', 'https://club85.sarfaa.com/images/qr/85-00028.svg', 'https://club85.sarfaa.com/club-members/fa004e44-21f1-4c11-aeca-5d60bb80050e', NULL, 0, NULL, '598945', '$2y$10$FFbeIkz.wuw.QiQ9jK7gN.7KRsjeYdexQn8IMlGUMmhYKGxuuuwki', NULL, '2023-10-18 16:52:32', '2023-10-18 16:52:33');
+(5, '3ecb1da7-749c-477f-9625-f539fbe7b35d', '85-00005', 'Tanver Mehede', NULL, 'Jibon', 'tanvermehede51@gmail.com', '01756531188', NULL, NULL, NULL, 'Mohakhali', 'Dhaka-North', 'Bangladesh', NULL, NULL, NULL, 'Dhaka', NULL, '24/5/1994', 'B+', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'RSK', 'Rajbari', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://club85.org/images/profile/1697723183.jpg', 'https://club85.org/images/qr/85-00005.svg', 'https://club85.org/club-members/3ecb1da7-749c-477f-9625-f539fbe7b35d', NULL, 0, NULL, '213767', '$2y$10$khMSubeiS3ZWyG7PnOpHrOiiCvB/hQ97cfYEo5Va/t67uCv4c0FSq', NULL, '2023-10-19 13:46:23', '2023-10-19 13:46:23'),
+(6, '4f576721-9d2e-43f0-8bf1-fabe8c42ff63', '85-00006', 'Abdul Rahman', NULL, 'Abdul Rahman', 'wakiller123@gmail.com', '01534822073', NULL, NULL, NULL, '210 malibag', 'dhaka', 'Bangladesh', NULL, 'dhaka', NULL, 'Dhaka', 'null', NULL, 'O+', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'abc school', 'Dhaka', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://club85.org/images/profile/1697723245.jpg', 'https://club85.org/images/qr/85-00006.svg', 'https://club85.org/club-members/4f576721-9d2e-43f0-8bf1-fabe8c42ff63', 'https://club85.org/pdf/85-00006-1697723450.pdf', 0, NULL, '400267', '$2y$10$PzUmWBqavXgCNmSHz1pP5uvD/e7Mm79Grf/dDa5Wnst1MvtvHQZVu', NULL, '2023-10-19 13:47:25', '2023-10-19 13:53:06'),
+(7, 'e36214f7-0f76-450e-a94e-995679c5f0d7', '85-00007', 'Mahboobul Alam', NULL, 'Mahboob', 'mahboobulalam@gmail.com', '01711526088', NULL, NULL, NULL, 'Lalmatia', 'Dhaka', 'Bangladesh', NULL, NULL, NULL, 'Dhaka', NULL, '18/8/1970', 'O+', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'BAF Shaheen School', 'Dhaka', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://club85.org/images/profile/1697729779.jpg', 'https://club85.org/images/qr/85-00007.svg', 'https://club85.org/club-members/e36214f7-0f76-450e-a94e-995679c5f0d7', 'https://club85.org/pdf/85-00007-1697729992.pdf', 0, NULL, '485801', '$2y$10$YizG1xiJBn9Sz78pYhmimO4geUbL9htyOH3fuPgtokcYTi6kPe6Ce', NULL, '2023-10-19 15:36:19', '2023-10-19 15:39:52');
 
 --
 -- Indexes for dumped tables
@@ -361,19 +388,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

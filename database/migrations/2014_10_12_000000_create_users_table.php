@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable();
             $table->string('secondary_phone')->nullable();
-            $table->string('nid')->nullable();
-            $table->string('passport')->nullable();
+            $table->string('nid_passport')->nullable();
 
             $table->text('present_address')->nullable();
             $table->string('present_district_city')->nullable();
@@ -32,7 +31,7 @@ return new class extends Migration
             $table->text('parmanent_district_city')->nullable();
             $table->text('parmanent_country')->nullable();
 
-            $table->string('dob')->nullable();
+            $table->date('dob')->nullable();
             $table->string('blood_group')->nullable();
 
             $table->string('spouse_name')->nullable();
@@ -57,14 +56,11 @@ return new class extends Migration
             $table->string('facebook_id')->nullable();
             $table->string('instagram_id')->nullable();
 
-            $table->string('bkash_number')->nullable();
+            $table->string('bkash_payment_ref')->nullable();
             $table->string('photo')->nullable();
 
             $table->string('qr_code')->nullable();
-            $table->string('qr_text')->nullable();
             $table->string('id_card_file')->nullable();
-
-            $table->string('is_verified')->nullable();
 
             $table->tinyInteger('user_type')->default(0)->comment('0: App User, 1: Admin');
 

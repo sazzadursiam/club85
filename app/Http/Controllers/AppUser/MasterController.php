@@ -73,11 +73,7 @@ class MasterController extends Controller
                                 }
 
                                 .img-wrapper img {
-                                    -webkit-transform: rotate(180deg);     /* Chrome and other webkit browsers */
-                                    -moz-transform: rotate(180deg);        /* FF */
-                                    -o-transform: rotate(180deg);          /* Opera */
-                                    -ms-transform: rotate(180deg);         /* IE9 */
-                                    transform: rotate(180deg);
+                                    
                                     height: 100%;
                                     width: 100%;
                                     object-fit: cover;
@@ -105,7 +101,7 @@ class MasterController extends Controller
                                 <div id="id_card">
                                     <h3 class="id-no" style="font-size:14px">CLUB85</h3>
                                     <div class="img-wrapper">
-                                        <img src="{$pphoto}" alt="" height="70px" width="70px">
+                                        <img src="{$pphoto}" alt="">
                                     </div>
                                     <h2 class="name" style="font-size:16px;margin-top:5px;">{$card_name}</h2>
                                     <!-- <h3 class="id-no" style="font-size:14px">{$member_id}</h3> -->

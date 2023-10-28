@@ -17,7 +17,59 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profile_info = User::with(['payments'])->find(Auth::user()->id);
+        $profile = User::with(['payments'])->find(Auth::user()->id);
+        $profile_info = (object) [
+            'id' => $profile->id,
+            'uuid' => $profile->uuid,
+            'member_id' => $profile->member_id,
+            'name' => $profile->name ?? "",
+            'name_bangla' => $profile->name_bangla ?? "",
+            'id_card_name' => $profile->id_card_name ?? "",
+            'email' => $profile->email ?? "",
+            'phone' => $profile->phone ?? "",
+            'secondary_phone' => $profile->secondary_phone ?? "",
+            'nid' => $profile->nid ?? "",
+            'passport' => $profile->passport ?? "",
+            'present_address' => $profile->present_address ?? "",
+            'present_district_city' => $profile->present_district_city ?? "",
+            'present_country' => $profile->present_country ?? "",
+            'parmanent_address' => $profile->parmanent_address ?? "",
+            'parmanent_district_city' => $profile->parmanent_district_city ?? "",
+            'parmanent_country' => $profile->parmanent_country ?? "",
+            'province_present_address' => $profile->province_present_address ?? "",
+            'dob' => $profile->dob ?? "",
+            'blood_group' => $profile->blood_group ?? "",
+            'spouse_name' => $profile->spouse_name ?? "",
+            'spouse_phone' => $profile->spouse_phone ?? "",
+            'spouse_email' => $profile->spouse_email ?? "",
+            'children_1_name' => $profile->children_1_name ?? "",
+            'children_2_name' => $profile->children_2_name ?? "",
+            'children_3_name' => $profile->children_3_name ?? "",
+            'children_4_name' => $profile->children_4_name ?? "",
+            'school' => $profile->school ?? "",
+            'school_district' => $profile->school_district ?? "",
+            'college' => $profile->college ?? "",
+            'college_district' => $profile->college_district ?? "",
+            'occupation' => $profile->occupation ?? "",
+            'additional_info_profession' => $profile->additional_info_profession ?? "",
+            'office_name' => $profile->office_name ?? "",
+            'office_location' => $profile->office_location ?? "",
+            'facebook_id' => $profile->facebook_id ?? "",
+            'instagram_id' => $profile->instagram_id ?? "",
+            'bkash_number' => $profile->bkash_number ?? "",
+            'photo' => $profile->photo ?? "",
+            'qr_code' => $profile->qr_code ?? "",
+            'qr_text' => $profile->qr_text ?? "",
+            'id_card_file' => $profile->id_card_file ?? "",
+            'user_type' => $profile->user_type ?? "",
+            'otp' => $profile->otp ?? "",
+            'created_at' => $profile->created_at ?? "",
+            'updated_at' => $profile->updated_at ?? "",
+        ];
+
+        // "payments": []
+
+
         if ($profile_info) {
             return response()->json([
                 'status' => 'ok',

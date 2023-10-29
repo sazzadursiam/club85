@@ -124,10 +124,11 @@ class MasterController extends Controller
 
         $info->id_card_file = url('/') . "/" . $path;
         $info->save();
-        // $model = 
+        $res_data = User::where('id', Auth::user()->id)->first();
         return response()->json([
             'status' => 'ok',
-            'info' =>  User::where('id', Auth::user()->id)->first(),
+            'id_card_file' =>  $res_data->id_card_file,
+            'payment_status' =>  $res_data->payment_status,
         ], 200);
     }
 
